@@ -1,4 +1,7 @@
 import {createContext, useState, useContext, useEffect} from "react"
+import { auth } from '../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+
 
 const MovieContext = createContext()
 
@@ -6,6 +9,13 @@ export const useMovieContext = () => useContext(MovieContext)
 
 export const MovieProvider = ({children}) => {
     const [favorites, setFavorites] = useState([])
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+          setUser(user);
+        });
+      }, []);
 
     useEffect(() => {
         const storedFavs = localStorage.getItem("favorites")
