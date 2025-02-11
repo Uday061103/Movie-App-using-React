@@ -1,21 +1,8 @@
 import { Link } from "react-router-dom";
 import "../css/Navbar.css";
-import { auth } from "../firebase";
-import { signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+
 
 function NavBar() {
-  const navigate = useNavigate();
-  const user = auth.currentUser; // Get current user
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      navigate("/login"); // Redirect to login after logout
-    } catch (error) {
-      console.error("Logout error:", error);
-    }
-  };
   return (
     <nav className="navbar">
       <div className="navbar-brand">
@@ -29,12 +16,6 @@ function NavBar() {
           Favorites
         </Link>
       </div>
-      {user && (
-        <div className="nav-auth">
-          <span>Welcome, UDAY</span>
-          <button onClick={handleLogout}>Logout</button>
-        </div>
-      )}
     </nav>
   );
 }
