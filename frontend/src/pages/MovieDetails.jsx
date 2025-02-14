@@ -47,7 +47,9 @@ function MovieDetails() {
       <h1>{movie.title}</h1>
       <p>{movie.overview}</p>
       {trailerKey ? (
+        <div className="video-container">
         <YouTube videoId={trailerKey} />
+      </div>
       ) : (
         <p>No trailer available.</p>
       )}
